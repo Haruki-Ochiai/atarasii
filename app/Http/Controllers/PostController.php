@@ -12,11 +12,13 @@ use App\Models\Post;
  */
 
 class PostController extends Controller
-{
+{   
+    public function index(Post $post)
+    {
+            return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);
+    }
     public function show(Post $post)//インポートしたPostをインスタンス化して$postとして使用。
     {
-        return view('posts.index')->with(['posts' => $post]); /*blade内で使う変数'posts'と設定。
-        'posts'の中身にgetを使い、インスタンス化した$postを代入。'postはbladeファイルで使う変数。中身は$id=1のPostインスタンス。*/
-        
+        return view('posts/show')->with(['post' =>$post]);
     }
 }
